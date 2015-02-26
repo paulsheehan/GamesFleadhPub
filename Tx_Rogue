@@ -1,1 +1,52 @@
 
+/*
+bit runner
+Jamal Mahmoud
+21/02/2015
+*/
+Path path;
+Player player;
+
+void setup()
+{
+  background(0);
+  size(500,500);
+  player = new Player(250, 450, color(34,120,200));
+  path = new Path();
+  path.begin();
+}
+
+void draw()
+{
+  path.begin();
+  player.display();
+}
+
+void keyPressed()
+{
+  boolean direction = true;
+  
+  if(key == 'd' || key == 'D' && direction == true)
+  {
+    direction = true;
+    player.pos.x++;
+    if(keyPressed)
+    {
+      if(key == 'a' || key == 'A')
+      {
+        direction = false;
+      }
+    }
+  }
+  if(key == 'a' || key == 'A' && direction == false)
+  {
+    player.pos.x--;
+    if(keyPressed)
+    {
+      if(key == 'a' || key == 'A')
+      {
+        direction = true;
+      }
+    }
+  }
+}
