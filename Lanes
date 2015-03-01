@@ -1,0 +1,13 @@
+class Lanes
+{
+  int[] laneNum = new int[5];
+  
+  Lanes()
+  {
+    for(i = 0; i < 5; i++)
+    {
+      laneNum[i] = 100*i;  //Assigns x position for each lane
+    }
+    
+  }
+}
