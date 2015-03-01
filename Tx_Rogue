@@ -1,52 +1,47 @@
-
-/*
-bit runner
-Jamal Mahmoud
-21/02/2015
-*/
-Path path;
-Player player;
+int i;  //Global index for forloops
 
 void setup()
 {
-  background(0);
-  size(500,500);
-  player = new Player(250, 450, color(34,120,200));
-  path = new Path();
-  path.begin();
+  size(500, 500);
+
 }
+
+Player p = new Player();  //The player
+
+Lanes lane = new Lanes();  //Just a class that has an array of 5 intergers(0, 100, 200, 300, 400) for the tiles location
+
+ArrayList<Path> tile = new ArrayList<Path>();  //Each individual tile gets a class
 
 void draw()
 {
-  path.begin();
-  player.display();
-}
-
-void keyPressed()
-{
-  boolean direction = true;
+  background(0);  //Clears page every iteration of draw()
   
-  if(key == 'd' || key == 'D' && direction == true)
+
+  
+  if(tile.size() < 1)  //The very first iteration of draw
   {
-    direction = true;
-    player.pos.x++;
-    if(keyPressed)
+    for(i = 0; i < 7; i++)  //Will create the first 7 tiles
     {
-      if(key == 'a' || key == 'A')
-      {
-        direction = false;
-      }
+      tile.add(new Path(lane.laneNum[2], i*100, 100, 100));  //tile(x, y, w, h), y = i*height of the tile, first 7 will spawn at pos.x=200
     }
+    
   }
-  if(key == 'a' || key == 'A' && direction == false)
+  else
   {
-    player.pos.x--;
-    if(keyPressed)
+    if(tile.size() < 10)
     {
-      if(key == 'a' || key == 'A')
-      {
-        direction = true;
-      }
+      tile.add(new Path(lane.laneNum[int(random(5))], 0-100, 100, 100));//tile(x, y, w, h)  //For now the tile spawns at a random number on x
+      
     }
+      
   }
+
+  for(i = 1; i < (tile.size()); i++)  //Goes through each tile
+  {
+    tile.get(i-1).display();  //i-1 to avoid out of bound index
+    tile.get(i-1).update(i-1);
+  }
+  
+  p.display();  //player display
+  p.update();  //player update
 }
