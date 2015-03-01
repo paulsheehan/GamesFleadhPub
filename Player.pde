@@ -1,31 +1,33 @@
-class Player
+class Player extends GameObject
 {
-  PVector pos;
-  boolean direction;
-  color colour;
+  int pSpeed;
   
-  Player(float x, float y, color colour) 
+  Player()
   {
-    pos = new PVector(x,y);
-    this.colour = colour;
+    this.pos.x = 250;
+    this.pos.y = 250;
+    pSpeed = 2;  
+  }
+  
+  void update()
+  {
+
+      switch(keyCode)
+      {
+        case LEFT:
+          this.pos.x = this.pos.x - pSpeed;
+          break;
+        case RIGHT:
+          this.pos.x = this.pos.x + pSpeed;
+          break;
+      }
   }
   
   void display()
   {
-    fill(colour);
-    stroke(0,0,255);
-    ellipse(pos.x, pos.y, 20, 20);
-  }
-  
-  void move(boolean direction)
-  {
-    if(direction == true)
-    {
-      pos.x++;
-    }
-    else if(direction == false)
-    {
-      pos.x--;
-    }
+    fill(100, 100, 100);
+    ellipse(p.pos.x, p.pos.y, 10, 10);
+    
+    
   }
 }
