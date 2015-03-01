@@ -1,0 +1,8 @@
+abstract class GameObject  //Each game object inherits position, width, height, and if its alive or not
+{
+  PVector pos = new PVector();
+  
+  PVector wh = new PVector();
+  
+  boolean alive;
+}
