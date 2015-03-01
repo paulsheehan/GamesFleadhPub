@@ -1,0 +1,38 @@
+class PowerUps extends GameObject
+{
+  int type;
+  
+  PowerUps(int type, int x, int y)
+  {
+    this.type = type;
+    this.pos.x = x;
+    this.pos.y = y;
+    
+    
+    this.wh.x = 20;
+    this.wh.y = 20;
+    this.alive = true;
+  }
+  
+  void update()
+  {
+    if(this.pos.y < height)
+    {
+      this.pos.y++;
+    }
+    if(this.pos.y == p.pos.y)
+    {
+      
+    }
+  }
+  
+  void display()
+  {
+    ellipse(this.pos.x, this.pos.y, this.wh.x, this.wh.y);
+  }
+  
+  void pickedUp()
+  {
+    
+  }
+}
