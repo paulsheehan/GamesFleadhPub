@@ -1,57 +1,52 @@
-class Path 
+class Path extends GameObject
 {
-  PVector pos;
-  PVector track;
+  int type;  //3 tpyes of paths, middle, outher, and outhest paths
   
-  boolean direction;
-  color colour;
-  
-  float speed;
-  float gap = 20;
-  float size = (height)/gap;
-  
-  Path()
+  Path(int x, float y, int w, int h)
   {
-    pos = new PVector(50, 400);
-    track = new PVector(133, -400);
-  }
-  
-  void begin()
-  {
-    //transmitter box
-    fill(255);
-    stroke(0);
-    rect(pos.x, pos.y, 400, 100);
-    //three tracks (green, blue and red)
-    stroke(0);
-    fill(0, 120, 0);
-    rect(pos.x, pos.y, track.x, track.y);
-    fill(0, 0, 120);
-    rect(pos.x+133, pos.y, track.x, track.y);
-    fill(120,0,0);
-    rect(pos.x+266, pos.y, track.x+1, track.y);
-    //centre line
-    stroke(0,0,255);
-    line(width/2 , pos.y, width/2, -7);
-    //graphed lines going horizontally
-    for(int i=0;i<size;i++)
+    this.pos.x = x;
+    this.pos.y = y;
+    this.wh.x = w;
+    this.wh.y = h;
+    alive = true;
+    
+    //Just assigns an interger to tile.type depending on what element was passed in our main class
+    if(x == 0 || x == 4)
     {
-      stroke(0);
-      line(pos.x,pos.y, pos.x+400, pos.y);
-      pos.y -= gap;
+      type = 2;    //Each type could have a different picture?
+    }
+    if(x == 1 || x == 3)
+    {
+      type = 1;
+    }
+    if(x == 2)
+    {
+      type = 0;
+    }
+    
+  }
+
+  void update(int i)
+  {
+    
+    if(this.pos.y < height)  //If tile is still on screen
+    {
+      this.pos.y++;
+    }
+    else                     //If not tile dies and is removed from arraylist
+    {
+      alive = false;
+      tile.remove(i);
     }
   }
   
-  void move()
+  void display()
   {
-    
-    //three tracks
-    stroke(0);
-    fill(0, 120, 0);
-    rect(pos.x, pos.y, track.x, track.y);
-    fill(0, 0, 120);
-    rect(pos.x+133, pos.y, track.x, track.y);
-    fill(120,0,0);
-    rect(pos.x+266, pos.y, track.x+1, track.y);
+    if(this.alive == true)
+    {
+      //image(tiles[0], this.pos.x, this.pos.y);
+      fill(30, 30, 110);
+      rect(this.pos.x, this.pos.y, this.wh.x, this.wh.y);
+    }
   }
 }
