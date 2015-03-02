@@ -2,7 +2,7 @@ class PowerUps extends GameObject
 {
   int type;
   
-  PowerUps(int type, int x, int y)
+  PowerUps(int type, float x, float y)
   {
     this.type = type;
     this.pos.x = x;
@@ -16,23 +16,43 @@ class PowerUps extends GameObject
   
   void update()
   {
+    //powerup moves down screen
     if(this.pos.y < height)
     {
-      this.pos.y++;
+      this.pos.y = this.pos.y + 4;
     }
-    if(this.pos.y == p.pos.y)
+    else
     {
+     alive = false; 
+    }
+    
+    //If player and powerup are touching
+    if(this.pos.x == p.pos.x && this.pos.y == p.pos.y)
+    {
+      alive = false;
+      score = score + 2;
+//      switch(this.type)
+//      case 0:  //Double points
+//        break;
+//      case 1:  //Slow time
+//        p.pSpeed = 2;
+//        break;
+//      case 2:  //Lowers difficulty of path
+//        break;
+//      case 3:  //Brief invisibility
+//        break;
       
     }
   }
   
   void display()
   {
-    ellipse(this.pos.x, this.pos.y, this.wh.x, this.wh.y);
+    if(this.alive == true)
+    {
+      fill(20, 40, 55);
+      ellipse(this.pos.x, this.pos.y, this.wh.x, this.wh.y);
+    }
   }
   
-  void pickedUp()
-  {
-    
-  }
+
 }
