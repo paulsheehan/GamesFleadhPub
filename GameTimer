@@ -1,0 +1,22 @@
+class GameTimer
+{
+  int start;
+  int end;
+  int total;
+  
+  GameTimer()
+  {
+    start = millis();
+  }
+  
+  void update()
+  {
+    
+  }
+  
+  void endtimer()
+  {
+    end = millis();
+    total = end - start;
+  }
+}
