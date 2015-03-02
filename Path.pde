@@ -1,14 +1,17 @@
 class Path extends GameObject
 {
-  int type;  //3 tpyes of paths, middle, outher, and outhest paths
+  int type;  //3 types of paths, middle, outher, and outhest paths
+  int speed;
+  int pSpeed;
   
-  Path(int x, float y, int w, int h)
+  Path(int x, int y, int w, int h, int speed)
   {
     this.pos.x = x;
     this.pos.y = y;
     this.wh.x = w;
     this.wh.y = h;
-    alive = true;
+    this.alive = true;
+    this.speed = speed;
     
     //Just assigns an interger to tile.type depending on what element was passed in our main class
     if(x == 0 || x == 4)
@@ -31,7 +34,7 @@ class Path extends GameObject
     
     if(this.pos.y < height)  //If tile is still on screen
     {
-      this.pos.y++;
+      this.pos.y = this.pos.y + this.speed - this.pSpeed;
     }
     else                     //If not tile dies and is removed from arraylist
     {
