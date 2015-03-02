@@ -1,8 +1,12 @@
 int i;  //Global index for forloops
+int startTime;
+int score;
 
 void setup()
 {
   size(500, 500);
+  
+  score = 0;
 
 }
 
@@ -11,37 +15,64 @@ Player p = new Player();  //The player
 Lanes lane = new Lanes();  //Just a class that has an array of 5 intergers(0, 100, 200, 300, 400) for the tiles location
 
 ArrayList<Path> tile = new ArrayList<Path>();  //Each individual tile gets a class
+ArrayList<PowerUps> powerUp = new ArrayList<PowerUps>();  
 
 void draw()
 {
   background(0);  //Clears page every iteration of draw()
   
 
-  
+  //Creates path at top of screen
   if(tile.size() < 1)  //The very first iteration of draw
   {
     for(i = 0; i < 7; i++)  //Will create the first 7 tiles
     {
-      tile.add(new Path(lane.laneNum[2], i*100, 100, 100));  //tile(x, y, w, h), y = i*height of the tile, first 7 will spawn at pos.x=200
+      tile.add(new Path(lane.laneNum[2], i*100, 100, 100, 4));  //tile(x, y, w, h, speed), y = i*height of the tile, first 7 will spawn at pos.x=200
     }
     
   }
   else
   {
+    
     if(tile.size() < 10)
     {
-      tile.add(new Path(lane.laneNum[int(random(5))], 0-100, 100, 100));//tile(x, y, w, h)  //For now the tile spawns at a random number on x
+      //Creates path at top of screen
+      tile.add(new Path(lane.laneNum[int(random(5))], 0-100, 100, 100, 4));//tile(x, y, w, h)  //For now the tile spawns at a random number on x
       
+      //Everytime a new paths created theres a chance of a powerup appearing with it
+      if(int(noise(100))%4 == 0)
+      {
+        
+        powerUp.add(new PowerUps(int(noise(4)), tile.get(0).pos.x+50, 0));
+      }
     }
       
   }
 
-  for(i = 1; i < (tile.size()); i++)  //Goes through each tile
+  //Goes through each tile and moves and displays them
+  for(i = 1; i < (tile.size()); i++)  
   {
     tile.get(i-1).display();  //i-1 to avoid out of bound index
     tile.get(i-1).update(i-1);
   }
   
-  p.display();  //player display
-  p.update();  //player update
+  //Removes any dead powerups
+  for(i = 1; i < powerUp.size(); i++) 
+  {
+    if(powerUp.get(i-1).alive == false)
+    {
+      powerUp.remove(i-1);
+    }
+  }
+  
+  //Move powerUp
+  if(powerUp.size() > 0)  //If statement to avoid refencing non existing class
+  {
+    powerUp.get(0).display();
+    powerUp.get(0).update();
+  }
+  
+  //Display and move player  
+  p.display();  
+  p.update();  
 }
