@@ -1,12 +1,12 @@
 class Player extends GameObject
 {
-  int pSpeed;
+  int speed;
   
   Player()
   {
     this.pos.x = 250;
     this.pos.y = 250;
-    pSpeed = 2;  
+    speed = 4;  
   }
   
   void update()
@@ -15,10 +15,10 @@ class Player extends GameObject
       switch(keyCode)
       {
         case LEFT:
-          this.pos.x = this.pos.x - pSpeed;
+          this.pos.x = this.pos.x - speed;
           break;
         case RIGHT:
-          this.pos.x = this.pos.x + pSpeed;
+          this.pos.x = this.pos.x + speed;
           break;
       }
   }
