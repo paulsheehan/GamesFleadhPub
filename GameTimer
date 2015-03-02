@@ -18,5 +18,8 @@ class GameTimer
   {
     end = millis();
     total = end - start;
+    
+    end = end/1000;
+    println(end);
   }
 }
