@@ -13,6 +13,7 @@ void setup()
 Player p = new Player();  //The player
 
 Lanes lane = new Lanes();  //Just a class that has an array of 5 intergers(0, 100, 200, 300, 400) for the tiles location
+GameTimer gametime;
 
 ArrayList<Path> tile = new ArrayList<Path>();  //Each individual tile gets a class
 ArrayList<PowerUps> powerUp = new ArrayList<PowerUps>();  
@@ -25,6 +26,8 @@ void draw()
   //Creates path at top of screen
   if(tile.size() < 1)  //The very first iteration of draw
   {
+    gametime = new GameTimer();
+    
     for(i = 0; i < 7; i++)  //Will create the first 7 tiles
     {
       tile.add(new Path(lane.laneNum[2], i*100, 100, 100, 4));  //tile(x, y, w, h, speed), y = i*height of the tile, first 7 will spawn at pos.x=200
@@ -75,4 +78,6 @@ void draw()
   //Display and move player  
   p.display();  
   p.update();  
+  
+  gametime.endtimer();
 }
